@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Exchange</title>
+</head>
+<body>
+
+<div class="container">
+    <div align="center" class="jumbotron">
+        <h1>KALKULATOR WALUTOWY</h1>
+        <p>Wpisz walutę, którą chcesz przeliczyć!!</p>
+    </div>
+
+</div>
+
+<div align="center" class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-body"> <p>Nazwa waluty 1</p>
+            <h1 th:if = "${currency1 != null}" th:text = "${currency1.getDescription()}">Nazwa Waluty 1</h1></div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body"> <p>Nazwa waluty 2</p>
+            <h1 th:if = "${currency2 != null}" th:text = "${currency2.getDescription()}">Nazwa Waluty 2</h1></div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body"><p>Kod Waluty 1</p>
+            <h1 th:if = "${currency1 != null}" th:text = "${currency1.getCurrencyCode()}">Kod Waluty 1</h1></div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body"><p>Kod Waluty 2</p>
+            <h1 th:if = "${currency2 != null}" th:text = "${currency2.getCurrencyCode()}">Kod Waluty 2</h1></div>
+    </div>
+
+    <div class="panel panel-default">
+        <p>Cena kupna 1</p>
+        <h1 th:if = "${currency1 != null}" th:text = "${currency1.getRates().get(0).getBid()}">Cena kupna 1</h1>
+    </div>
+
+    <div class="panel panel-default">
+        <p>Cena kupna 2</p>
+        <h1 th:if = "${currency2 != null}" th:text = "${currency2.getRates().get(0).getBid()}">Cena kupna 2</h1>
+    </div>
+
+    <div class="panel panel-default">
+        <p>Cena sprzedaży 1</p>
+        <h1 th:if = "${currency1 != null}" th:text = "${currency1.getRates().get(0).getAsk()}">cena sprzedaży 1</h1>
+    </div>
+
+    <div class="panel panel-default">
+        <p>Cena sprzedaży 2</p>
+        <h1 th:if = "${currency2 != null}" th:text = "${currency2.getRates().get(0).getAsk()}">cena sprzedaży 2</h1>
+    </div>
+
+    <div class="panel panel-default">
+        <form action="/"  method="post">
+            <p>Mam:</p>
+            <input type="text" name="givenAmount">
+            <h1 th:if = "${givenAmount != null}" th:text = "${givenAmount}"></h1>
+            <select name="currencyCode1">
+                <option value="USD">USD</option>
+                <option value="AUD">AUD</option>
+                <option value="CAD">CAD</option>
+                <option value="EUR">EUR</option>
+                <option value="HUF">HUF</option>
+                <option value="CHF">CHF</option>
+                <option value="GBP">GBP</option>
+                <option value="JPY">JPY</option>
+                <option value="CZK">CZK</option>
+                <option value="DKK">DKK</option>
+                <option value="NOK">NOK</option>
+                <option value="SEK">SEK</option>
+                <option value="XDR">SDR (MFW)</option>
+            </select>
+
+            <p>Chcę:</p>
+            <h1 th:if = "${resultAmount != null}" th:text="${resultAmount}">Wynik</h1>
+            <select name="currencyCode2">
+                <option value="USD">USD</option>
+                <option value="AUD">AUD</option>
+                <option value="CAD">CAD</option>
+                <option value="EUR">EUR</option>
+                <option value="HUF">HUF</option>
+                <option value="CHF">CHF</option>
+                <option value="GBP">GBP</option>
+                <option value="JPY">JPY</option>
+                <option value="CZK">CZK</option>
+                <option value="DKK">DKK</option>
+                <option value="NOK">NOK</option>
+                <option value="SEK">SEK</option>
+                <option value="XDR">SDR (MFW)</option>
+            </select>
+            <input type="submit" value="Przelicz walutę">
+        </form>
+    </div>
+</div>
+    </div>
+</body>
+</html>
