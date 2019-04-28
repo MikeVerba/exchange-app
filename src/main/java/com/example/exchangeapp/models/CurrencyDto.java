@@ -22,9 +22,7 @@ public class CurrencyDto {
     public static class RatesDto {
 
 
-        //@JsonProperty("bid")
         private double bid;
-        //@JsonProperty("ask")
         private double ask;
 
 

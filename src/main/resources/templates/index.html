@@ -74,6 +74,9 @@
                 <option value="NOK">NOK</option>
                 <option value="SEK">SEK</option>
                 <option value="XDR">SDR (MFW)</option>
+                <option th:if = "${givenAmount != null}" th:selected="selected" th:text="${currency1.getCurrencyCode()}">
+                    3
+                </option>
             </select>
 
             <p>Chcę:</p>
@@ -92,9 +95,14 @@
                 <option value="NOK">NOK</option>
                 <option value="SEK">SEK</option>
                 <option value="XDR">SDR (MFW)</option>
+                <option th:if = "${resultAmount != null}" th:selected="selected" th:text="${currency2.getCurrencyCode()}">
+                    3
+                </option>
             </select>
             <input type="submit" value="Przelicz walutę">
+            <input type="button" value="Przelicz nową walutę" onClick="location.href=location.href">
         </form>
+
     </div>
 </div>
     </div>
