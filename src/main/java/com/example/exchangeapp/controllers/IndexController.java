@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.math.BigDecimal;
+
 @Controller
 public class IndexController {
 
@@ -26,7 +28,7 @@ public class IndexController {
     @PostMapping("/")
     public String index(@RequestParam("currencyCode1") String currencyCode1,
                         @RequestParam("currencyCode2") String currencyCode2,
-                        @RequestParam("givenAmount") double givenAmount,
+                        @RequestParam("givenAmount") BigDecimal givenAmount,
                         Model model){
         model.addAttribute("currency1",currencyService.getCurrency(currencyCode1));
         model.addAttribute("currency2",currencyService.getCurrency(currencyCode2));

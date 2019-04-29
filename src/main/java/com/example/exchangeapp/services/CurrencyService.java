@@ -5,6 +5,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 @Service
 public class CurrencyService {
 
@@ -15,16 +18,15 @@ public class CurrencyService {
                 CurrencyDto.class);
     }
 
-    public double countExchangeResult(double amountOfGivenCurrency,
+    public BigDecimal countExchangeResult(BigDecimal amountOfGivenCurrency,
                                       CurrencyDto givenCurrency,
                                       CurrencyDto resultCurrency){
 
-        double givenSellingValue = givenCurrency.getRates().get(0).getAsk();
-        double resultBuyingValue = resultCurrency.getRates().get(0).getBid();
+        BigDecimal givenSellingValue = BigDecimal.valueOf(givenCurrency.getRates().get(0).getAsk());
+        BigDecimal resultBuyingValue = BigDecimal.valueOf(resultCurrency.getRates().get(0).getBid());
 
+        return amountOfGivenCurrency.multiply(givenSellingValue).divide(resultBuyingValue,2, RoundingMode.CEILING);
 
-
-        return Math.round((amountOfGivenCurrency*givenSellingValue)/resultBuyingValue);
     }
 
 
