@@ -57,9 +57,11 @@
     </div>
 
     <div class="panel panel-default">
-        <form action="/"  method="post">
+        <form action="/" th:object="${userInputForm}" method="post">
+
             <p>Mam:</p>
             <input type="text" name="givenAmount">
+
             <h1 th:if = "${givenAmount != null}" th:text = "${givenAmount}"></h1>
             <select name="currencyCode1">
                 <option value="USD">USD</option>

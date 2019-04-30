@@ -31,7 +31,7 @@ public class CurrencyService {
 
 
     @Bean
-    public RestTemplate getRestTemplate(){
+    private RestTemplate getRestTemplate(){
         return new RestTemplate();
     }
 }
