@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,7 +25,8 @@ public class IndexController {
     }
 
     @GetMapping("/")
-    public String index(){
+    public String index(Model model){
+        model.addAttribute("userInputForm",new UserInputForm());
         return "index";
     }
 
@@ -32,7 +34,7 @@ public class IndexController {
     public String index(@RequestParam("currencyCode1") String currencyCode1,
                         @RequestParam("currencyCode2") String currencyCode2,
                         @RequestParam("givenAmount") BigDecimal givenAmount,
-                        @Valid UserInputForm userInputForm,
+                        @ModelAttribute("userInputForm") @Valid UserInputForm userInputForm,
                         BindingResult bindingResult,
                         Model model){
 
@@ -42,7 +44,8 @@ public class IndexController {
 
 
         if(bindingResult.hasErrors()){
-            return "error";
+//            model.addAttribute("errorMessage","Invalid input!"); //todo remove this!!
+            return "redirect:/index";
 
         }
 

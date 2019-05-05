@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -18,6 +18,7 @@ public class UserInputForm {
     @NotNull
     @Digits(integer = 10, fraction = 2)
     @Min(value = 0)
+//    @Pattern(regexp = "\\d+(\\.\\d{1,2})?",message = "Invalid input!!")
     private BigDecimal givenAmount;
 
     public String getCurrencyCode1() {
