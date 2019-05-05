@@ -49,11 +49,21 @@
     </table>
 
 
-    <form action="/" th:object="${userInputForm}" method="post">
+    <form action="#" th:action="@{/}" th:object="${userInputForm}" method="post">
         <div class="form-group">
             <label>Given Amount</label>
             <input type="text" name="givenAmount" th:field="*{givenAmount}" placeholder="Enter the sum you want to exchange">
             <p class="col-12 text-danger my-2 text-center" th:if="${#fields.hasErrors('givenAmount')}" th:errors="*{givenAmount}">Enter correct value</p>
+
+
+
+            <!--<tr>-->
+                <!--<td>Given Amount:</td>-->
+                <!--<td><input type="text" th:field="*{givenAmount}" /></td>-->
+                <!--<td th:if="${#fields.hasErrors('givenAmount')}" th:errors="*{givenAmount}">Value Error</td>-->
+            <!--</tr>-->
+
+
 
             <!--<label>Given Amount</label>-->
             <!--<p> <input type="text" th:field="*{givenAmount}"></p>-->

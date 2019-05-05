@@ -44,7 +44,7 @@ public class IndexController {
 
 
         if(bindingResult.hasErrors()){
-//            model.addAttribute("errorMessage","Invalid input!"); //todo remove this!!
+//
             return "redirect:/index";
 
         }
