@@ -22,11 +22,23 @@ public class CurrencyService {
                                       CurrencyDto givenCurrency,
                                       CurrencyDto resultCurrency){
 
-        BigDecimal givenSellingValue = BigDecimal.valueOf(givenCurrency.getRates().get(0).getAsk());
-        BigDecimal resultBuyingValue = BigDecimal.valueOf(resultCurrency.getRates().get(0).getBid());
+        BigDecimal givenSellingValue = getGivenSellingValue(givenCurrency);
+        BigDecimal resultBuyingValue = getResultBuyingValue(resultCurrency);
 
+        return countExchangeValue(amountOfGivenCurrency, givenSellingValue, resultBuyingValue);
+
+    }
+
+    public BigDecimal countExchangeValue(BigDecimal amountOfGivenCurrency, BigDecimal givenSellingValue, BigDecimal resultBuyingValue) {
         return amountOfGivenCurrency.multiply(givenSellingValue).divide(resultBuyingValue,2, RoundingMode.CEILING);
+    }
 
+    private BigDecimal getResultBuyingValue(CurrencyDto resultCurrency) {
+        return BigDecimal.valueOf(resultCurrency.getRates().get(0).getBid());
+    }
+
+    private BigDecimal getGivenSellingValue(CurrencyDto givenCurrency) {
+        return BigDecimal.valueOf(givenCurrency.getRates().get(0).getAsk());
     }
 
 
