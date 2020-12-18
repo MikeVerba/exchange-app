@@ -1,19 +1,18 @@
 package com.example.exchangeapp.services;
 
+import com.example.exchangeapp.config.ApiProperties;
 import com.example.exchangeapp.models.CurrencyDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 class CurrencyServiceTest {
 
@@ -30,6 +29,11 @@ class CurrencyServiceTest {
     CurrencyDto.RatesDto ratesDtoGiven;
 
     CurrencyDto.RatesDto ratesDtoResult;
+
+    ApiProperties apiProperties;
+
+    @Mock
+    RestTemplate restTemplate;
 
 
 
@@ -64,7 +68,12 @@ class CurrencyServiceTest {
         resultCurrency.setDescription("Frank");
         resultCurrency.setCurrencyCode("CHF");
 
-        currencyService = new CurrencyService();
+        apiProperties = new ApiProperties();
+        apiProperties.setBaseUrl("www.test.com");
+        apiProperties.setExchangeGroup("B");
+        apiProperties.setFormatVariable("json");
+
+        currencyService = new CurrencyService(restTemplate,apiProperties);
     }
 
     @Test

@@ -6,7 +6,6 @@ import lombok.Data;
 
 import java.util.List;
 
-
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CurrencyDto {
@@ -16,15 +15,11 @@ public class CurrencyDto {
     @JsonProperty("code")
     private String currencyCode;
 
-
     private List<RatesDto> rates;
 
     public static class RatesDto {
-
-
         private double bid;
         private double ask;
-
 
         public double getBid() {
             return bid;
@@ -42,29 +37,5 @@ public class CurrencyDto {
             this.ask = ask;
         }
 
-    }
-
-    public List<RatesDto> getRates() {
-        return rates;
-    }
-
-    public void setRates(List<RatesDto> rates) {
-        this.rates = rates;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getCurrencyCode() {
-        return currencyCode;
-    }
-
-    public void setCurrencyCode(String currencyCode) {
-        this.currencyCode = currencyCode;
     }
 }

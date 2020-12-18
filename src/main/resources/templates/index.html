@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <meta charset="UTF-8">
-
     <title>Exchange</title>
 </head>
 <body>
@@ -18,186 +15,104 @@
     </div>
 
 </div>
-    <table class="table table-striped">
-        <thead class="thead-dark">
-        <tr>
-            <th> First Currency Name</th>
-            <th> Second Currency Name</th>
-            <th> First Currency Code</th>
-            <th> Second Currency Code</th>
-            <th> First Currency Buying Price</th>
-            <th> Second Currency Buying Price</th>
-            <th> First Currency Selling Price</th>
-            <th> Second Currency Selling Price</th>
-        </tr>
-        </thead>
-        <tbody>
+<table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+        <th><span th:if="${currency1 != null}">First Currency Name</span></th>
+        <th><span th:if="${currency1 != null}">Second Currency Name</span></th>
 
-        <tr>
-                <td><span th:if = "${currency1 != null}" th:text = "${currency1.getDescription()}"></span></td>
-                <td><span th:if = "${currency2 != null}" th:text = "${currency2.getDescription()}"></span></td>
-                <td><span th:if = "${currency1 != null}" th:text = "${currency1.getCurrencyCode()}"></span></td>
-                <td><span th:if = "${currency2 != null}" th:text = "${currency2.getCurrencyCode()}"></span></td>
-                <td><span th:if = "${currency1 != null}" th:text = "${currency1.getRates().get(0).getBid()}"></span></td>
-                <td><span th:if = "${currency2 != null}" th:text = "${currency2.getRates().get(0).getBid()}"></span></td>
-                <td><span th:if = "${currency1 != null}" th:text = "${currency1.getRates().get(0).getAsk()}"></span></td>
-                <td><span th:if = "${currency2 != null}" th:text = "${currency2.getRates().get(0).getAsk()}"></span></td>
+        <th><span th:if="${currency1 != null}">First Currency Code</span></th>
+        <th><span th:if="${currency1 != null}">Second Currency Code</span></th>
 
+        <th><span th:if="${currency1 != null}">First Currency Buying Price</span></th>
+        <th><span th:if="${currency1 != null}">Second Currency Buying Price</span></th>
 
-        </tr>
-        </tbody>
-    </table>
-
-
+        <th><span th:if="${currency1 != null}">First Currency Selling Price</span></th>
+        <th><span th:if="${currency1 != null}">Second Currency Selling Price</span></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><span th:if="${currency1 != null}" th:text="${currency1.getDescription()}"></span></td>
+        <td><span th:if="${currency2 != null}" th:text="${currency2.getDescription()}"></span></td>
+        <td><span th:if="${currency1 != null}" th:text="${currency1.getCurrencyCode()}"></span></td>
+        <td><span th:if="${currency2 != null}" th:text="${currency2.getCurrencyCode()}"></span></td>
+        <td><span th:if="${currency1 != null}" th:text="${currency1.getRates().get(0).getBid()}"></span></td>
+        <td><span th:if="${currency2 != null}" th:text="${currency2.getRates().get(0).getBid()}"></span></td>
+        <td><span th:if="${currency1 != null}" th:text="${currency1.getRates().get(0).getAsk()}"></span></td>
+        <td><span th:if="${currency2 != null}" th:text="${currency2.getRates().get(0).getAsk()}"></span></td>
+    </tr>
+    </tbody>
+</table>
+<div align="center">
     <form action="#" th:action="@{/}" th:object="${userInputForm}" method="post">
         <div class="form-group">
             <label>Given Amount</label>
-            <input type="text" name="givenAmount" th:field="*{givenAmount}" placeholder="Enter the sum you want to exchange">
-            <p class="col-12 text-danger my-2 text-center" th:if="${#fields.hasErrors('givenAmount')}" th:errors="*{givenAmount}">Enter correct value</p>
-
-
-
-            <!--<tr>-->
-                <!--<td>Given Amount:</td>-->
-                <!--<td><input type="text" th:field="*{givenAmount}" /></td>-->
-                <!--<td th:if="${#fields.hasErrors('givenAmount')}" th:errors="*{givenAmount}">Value Error</td>-->
-            <!--</tr>-->
-
-
-
-            <!--<label>Given Amount</label>-->
-            <!--<p> <input type="text" th:field="*{givenAmount}"></p>-->
-            <!--<p class="col-12 text-danger my-2 text-center" th:if="${#fields.hasErrors('givenAmount')}" th:errors="*{givenAmount}">Enter correct value</p>-->
-
-
-
-
-            <h1 th:if = "${givenAmount != null}" th:text = "${givenAmount}"></h1>
+            <label>
+                <input type="text" name="givenAmount" th:field="*{givenAmount}"
+                       placeholder="Enter the sum you want to exchange">
+            </label>
+            <p class="col-12 text-danger my-2 text-center" th:if="${#fields.hasErrors('givenAmount')}"
+               th:errors="*{givenAmount}">Enter correct value</p>
+            <h1 th:if="${givenAmount != null}" th:text="${givenAmount}"></h1>
         </div>
         <div class="form-group">
-            <select name="currencyCode1">
-                <option value="USD">USD</option>
-                <option value="AUD">AUD</option>
-                <option value="CAD">CAD</option>
-                <option value="EUR">EUR</option>
-                <option value="HUF">HUF</option>
-                <option value="CHF">CHF</option>
-                <option value="GBP">GBP</option>
-                <option value="JPY">JPY</option>
-                <option value="CZK">CZK</option>
-                <option value="DKK">DKK</option>
-                <option value="NOK">NOK</option>
-                <option value="SEK">SEK</option>
-                <option value="XDR">SDR (MFW)</option>
-                <option th:if = "${givenAmount != null}" th:selected="selected" th:text="${currency1.getCurrencyCode()}">
-                </option>
-            </select>
+            <label>
+                <select name="currencyCode1">
+                    <option value="USD">USD</option>
+                    <option value="AUD">AUD</option>
+                    <option value="CAD">CAD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="HUF">HUF</option>
+                    <option value="CHF">CHF</option>
+                    <option value="GBP">GBP</option>
+                    <option value="JPY">JPY</option>
+                    <option value="CZK">CZK</option>
+                    <option value="DKK">DKK</option>
+                    <option value="NOK">NOK</option>
+                    <option value="SEK">SEK</option>
+                    <option value="XDR">SDR (MFW)</option>
+                    <option th:if="${givenAmount != null}" th:selected="selected"
+                            th:text="${currency1.getCurrencyCode()}">
+                    </option>
+                </select>
+            </label>
         </div>
         <div class="form-group">
             <label>Result</label>
-            <h1 th:if = "${resultAmount != null}" th:text="${resultAmount}"></h1>
+            <h1 th:if="${resultAmount != null}" th:text="${resultAmount}"></h1>
         </div>
-
         <div class="form-group">
-        <select name="currencyCode2">
-            <option value="USD">USD</option>
-            <option value="AUD">AUD</option>
-            <option value="CAD">CAD</option>
-            <option value="EUR">EUR</option>
-            <option value="HUF">HUF</option>
-            <option value="CHF">CHF</option>
-            <option value="GBP">GBP</option>
-            <option value="JPY">JPY</option>
-            <option value="CZK">CZK</option>
-            <option value="DKK">DKK</option>
-            <option value="NOK">NOK</option>
-            <option value="SEK">SEK</option>
-            <option value="XDR">SDR (MFW)</option>
-            <option th:if = "${resultAmount != null}" th:selected="selected" th:text="${currency2.getCurrencyCode()}">
-            </option>
-        </select>
+            <label>
+                <select name="currencyCode2">
+                    <option value="USD">USD</option>
+                    <option value="AUD">AUD</option>
+                    <option value="CAD">CAD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="HUF">HUF</option>
+                    <option value="CHF">CHF</option>
+                    <option value="GBP">GBP</option>
+                    <option value="JPY">JPY</option>
+                    <option value="CZK">CZK</option>
+                    <option value="DKK">DKK</option>
+                    <option value="NOK">NOK</option>
+                    <option value="SEK">SEK</option>
+                    <option value="XDR">SDR (MFW)</option>
+                    <option th:if="${resultAmount != null}" th:selected="selected"
+                            th:text="${currency2.getCurrencyCode()}">
+                    </option>
+                </select>
+            </label>
         </div>
         <input type="submit" value="Exchange currency" class="btn btn-primary">
-        <input type="button" value="Exchange new currency" class="btn btn-primary" onClick="location.href=location.href">
+        <input type="button" value="Exchange new currency" class="btn btn-primary"
+               onClick="location.href=location.href">
     </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!--<div class="panel panel-default">-->
-        <!--<form action="/" th:object="${userInputForm}" method="post" class="form-group">-->
-
-            <!--<p>Mam:</p>-->
-            <!--<input type="text" name="givenAmount">-->
-
-            <!--<h1 th:if = "${givenAmount != null}" th:text = "${givenAmount}"></h1>-->
-            <!--<select name="currencyCode1">-->
-                <!--<option value="USD">USD</option>-->
-                <!--<option value="AUD">AUD</option>-->
-                <!--<option value="CAD">CAD</option>-->
-                <!--<option value="EUR">EUR</option>-->
-                <!--<option value="HUF">HUF</option>-->
-                <!--<option value="CHF">CHF</option>-->
-                <!--<option value="GBP">GBP</option>-->
-                <!--<option value="JPY">JPY</option>-->
-                <!--<option value="CZK">CZK</option>-->
-                <!--<option value="DKK">DKK</option>-->
-                <!--<option value="NOK">NOK</option>-->
-                <!--<option value="SEK">SEK</option>-->
-                <!--<option value="XDR">SDR (MFW)</option>-->
-                <!--<option th:if = "${givenAmount != null}" th:selected="selected" th:text="${currency1.getCurrencyCode()}">-->
-                    <!--3-->
-                <!--</option>-->
-            <!--</select>-->
-
-            <!--<p>Chcę: </p>-->
-            <!--<h1 th:if = "${resultAmount != null}" th:text="${resultAmount}"></h1>-->
-            <!--<select name="currencyCode2">-->
-                <!--<option value="USD">USD</option>-->
-                <!--<option value="AUD">AUD</option>-->
-                <!--<option value="CAD">CAD</option>-->
-                <!--<option value="EUR">EUR</option>-->
-                <!--<option value="HUF">HUF</option>-->
-                <!--<option value="CHF">CHF</option>-->
-                <!--<option value="GBP">GBP</option>-->
-                <!--<option value="JPY">JPY</option>-->
-                <!--<option value="CZK">CZK</option>-->
-                <!--<option value="DKK">DKK</option>-->
-                <!--<option value="NOK">NOK</option>-->
-                <!--<option value="SEK">SEK</option>-->
-                <!--<option value="XDR">SDR (MFW)</option>-->
-                <!--<option th:if = "${resultAmount != null}" th:selected="selected" th:text="${currency2.getCurrencyCode()}">-->
-                    <!--3-->
-                <!--</option>-->
-            <!--</select>-->
-            <!--<input type="submit" value="Przelicz walutę">-->
-            <!--<input type="button" value="Przelicz nową walutę" onClick="location.href=location.href">-->
-        <!--</form>-->
-
-    <!--</div>-->
-<!--</div>-->
-    <!--</div>-->
-
-
+</div>
 <footer class="page-footer font-small bg-secondary text-white special-color-dark pt-4">
-
-
-    <div class="footer-copyright text-center py-3">© 2019 Copyright:
-        <a href=""> MikeVerba</a>
+    <div class="footer-copyright text-center py-3">© 2016 Copyright:
+        <a href="">Test123</a>
     </div>
-
-
 </footer>
-
 </body>
 </html>

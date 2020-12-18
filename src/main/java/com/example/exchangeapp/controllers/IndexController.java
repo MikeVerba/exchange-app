@@ -2,6 +2,7 @@ package com.example.exchangeapp.controllers;
 
 import com.example.exchangeapp.forms.UserInputForm;
 import com.example.exchangeapp.services.CurrencyService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,18 +16,14 @@ import javax.validation.Valid;
 import java.math.BigDecimal;
 
 @Controller
+@RequiredArgsConstructor
 public class IndexController {
 
     private final CurrencyService currencyService;
 
-    @Autowired
-    public IndexController(CurrencyService currencyService) {
-        this.currencyService = currencyService;
-    }
-
     @GetMapping("/")
-    public String index(Model model){
-        model.addAttribute("userInputForm",new UserInputForm());
+    public String index(Model model) {
+        model.addAttribute("userInputForm", new UserInputForm());
         return "index";
     }
 
@@ -36,26 +33,22 @@ public class IndexController {
                         @RequestParam("givenAmount") BigDecimal givenAmount,
                         @ModelAttribute("userInputForm") @Valid UserInputForm userInputForm,
                         BindingResult bindingResult,
-                        Model model){
+                        Model model) {
 
         userInputForm.setCurrencyCode1(currencyCode1);
         userInputForm.setCurrencyCode2(currencyCode2);
         userInputForm.setGivenAmount(givenAmount);
 
-
-        if(bindingResult.hasErrors()){
-//
+        if (bindingResult.hasErrors()) {
             return "redirect:/index";
-
         }
 
-        model.addAttribute("currency1",currencyService.getCurrency(currencyCode1));
-        model.addAttribute("currency2",currencyService.getCurrency(currencyCode2));
-        model.addAttribute("givenAmount",givenAmount);
-        model.addAttribute("resultAmount",currencyService.countExchangeResult(givenAmount,currencyService.getCurrency(currencyCode1),
+        model.addAttribute("currency1", currencyService.getCurrency(currencyCode1));
+        model.addAttribute("currency2", currencyService.getCurrency(currencyCode2));
+        model.addAttribute("givenAmount", givenAmount);
+        model.addAttribute("resultAmount",
+                currencyService.countExchangeResult(givenAmount, currencyService.getCurrency(currencyCode1),
                 currencyService.getCurrency(currencyCode2)));
-
-
         return "index";
     }
 }
